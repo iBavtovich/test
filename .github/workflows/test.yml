@@ -22,4 +22,4 @@ jobs:
               development,
               TEST2,
               TEST2
-            });
+            })
