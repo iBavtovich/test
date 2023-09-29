@@ -30,7 +30,9 @@ jobs:
               }
             });
             
-            console.log(JSON.stringify(var_response));
+            if (var_response['status'] == 404) {
+              console.log("Not Present");
+            }
             return;
 #            github.rest.actions.createEnvironmentVariable({
 #              repository_id: ${{ github.repository_id }},
