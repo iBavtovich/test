@@ -17,9 +17,24 @@ jobs:
         with:
           github-token: ${{ secrets.REPO_TOKEN }}
           script: |
-            github.rest.actions.createEnvironmentVariable({
+            # JS method is not available in actions/github-script, due to old version of octokit
+            # https://github.com/actions/github-script/issues/345#issue-1616629011
+            
+            const var_response = await github.request(
+            'GET /repositories/{repository_id}/environments/{environment_name}/variables/{name}', 
+            {
               repository_id: ${{ github.repository_id }},
               environment_name: 'development',
               name: 'TEST2',
-              value: 'TEST2',
-            });
+              headers: {
+                'X-GitHub-Api-Version': '2022-11-28'
+              }
+            })
+            console.log(JSON.stringify(var_response));
+            return;
+#            github.rest.actions.createEnvironmentVariable({
+#              repository_id: ${{ github.repository_id }},
+#              environment_name: 'development',
+#              name: 'TEST2',
+#              value: 'TEST2',
+#            });
