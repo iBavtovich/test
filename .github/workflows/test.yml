@@ -10,13 +10,14 @@ jobs:
   run:
     environment: development
     env: 
-      TEST_ENV: ${{ secrets.TEST }}
+      TEST_ENV: ${{ secrets.TEST_SECRET }}
     runs-on: ubuntu-latest
 
     steps:
       - name: TEST
         run:  | 
-          echo "ENV: $(echo '${{ secrets.TEST }}' | base64)"
+          echo "ENV: $(echo '${{ secrets.TEST_SECRET }}' | base64)"
+          echo "ENV: $(echo '${{ secrets.TEST_SECRET2 }}' | base64)"
       - name: Set repository secret TEST
         uses: mmercan/actions-set-secret@v/4.0.0
         with:
