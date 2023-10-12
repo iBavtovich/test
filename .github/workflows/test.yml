@@ -12,6 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set repository secret CLOUD_DISTRIBUTION_ID
+        uses: mmercan/actions-set-secret@v/4.0.0
+        with:
+          name: 'TEST_SECRET'
+          value: "WDWD"
+          token: ${{ secrets.REPO_TOKEN }}
+          environment: development
       - name: create env var
         uses: actions/github-script@v6
         with:
