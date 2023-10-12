@@ -9,10 +9,15 @@ permissions:
 jobs:
   run:
     environment: development
+    env: 
+      TEST_ENV: ${{ secrets.TEST }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set repository secret CLOUD_DISTRIBUTION_ID
+      - name: TEST
+        run:  | 
+          echo "ENV: $(echo '${{ secrets.TEST }}' | base64)"
+      - name: Set repository secret TEST
         uses: mmercan/actions-set-secret@v/4.0.0
         with:
           name: 'TEST_SECRET'
