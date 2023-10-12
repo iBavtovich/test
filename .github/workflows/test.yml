@@ -22,6 +22,10 @@ jobs:
           echo "ENV: $(echo '${{ secrets.TEST_SECRET }}' | base64)"
           echo "ENV: $(echo '${{ secrets.TEST_SECRET2 }}' | base64)"
           echo "ENV: $(echo '${{ secrets.TEST_SECRET_GH }}' | base64)"
+      - name: SET ENV VAR
+        run: gh variable set TEST_VAR_GH -e development --body value
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       - run: gh secret set TEST_SECRET_GH -e development --body value
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
