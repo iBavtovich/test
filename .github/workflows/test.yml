@@ -18,6 +18,10 @@ jobs:
         run:  | 
           echo "ENV: $(echo '${{ secrets.TEST_SECRET }}' | base64)"
           echo "ENV: $(echo '${{ secrets.TEST_SECRET2 }}' | base64)"
+          echo "ENV: $(echo '${{ secrets.TEST_SECRET_GH }}' | base64)"
+      - run: gh secret set TEST_SECRET_GH -e development --body value
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       - name: Set repository secret TEST
         uses: mmercan/actions-set-secret@v/4.0.0
         with:
